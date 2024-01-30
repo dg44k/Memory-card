@@ -1,0 +1,9 @@
+.cards {
+    max-width: 60vw;
+    margin: 100px auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    gap: 20px;
+}
