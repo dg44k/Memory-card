@@ -4,4 +4,6 @@ export type ICards = {
         title: string;
         src: string;
     }[];
+    onClick: (score: number) => void;
+    updateBestScore: (bestScore: number) => void;
 }

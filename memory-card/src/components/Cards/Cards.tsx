@@ -7,13 +7,15 @@ import { ICardUnit } from "../../types/ICardUnit";
 
 
 
-const Cards: React.FC<ICards> = ({cards}) => {
+const Cards: React.FC<ICards> = ({cards, onClick, updateBestScore}) => {
     const [cardsUnit, setCardsUnit] = useState<ICardUnit[]>(cards.map(card => {
         return {
             ...card,
             click: 0,
         }
     }));
+    const [score, setScore] = useState(0);
+    const [bestScore, setBestScore] = useState(0);
 
     
 
@@ -40,16 +42,46 @@ const Cards: React.FC<ICards> = ({cards}) => {
             return prevCardsUnit;
         }) 
     }
-    
+
+    function handleClickCard (score: number): void {
+        setScore(prevScore => prevScore + 1);
+        onClick(score) 
+    }
+
+    function changeBestScore (bestScore: number): void {
+        setBestScore(bestScore);
+        updateBestScore(bestScore);
+    }
+
+    function resetDate (): void {
+        setScore(0);
+        onClick(0);
+        setCardsUnit(prevCardsUnit => prevCardsUnit
+            .map(item => {
+                return {...item, click: 0};
+            }))
+    }
+
     useEffect(() => {
         const lengthDoubleClick = cardsUnit.filter(card => card.click > 1).length;
         const lengthClick = cardsUnit.filter(card => card.click === 1).length;
 
         if (lengthDoubleClick >= 1) {
-            console.log('Last');
+            alert('Last');
+
+            if (score > bestScore) {
+                // score - 1 потому что последний клик считается также
+                changeBestScore(score - 1);
+            }
+            resetDate();
         } 
         else if (lengthClick === cardsUnit.length){
-            console.log('Win');  
+            alert('Win');  
+            changeBestScore(cardsUnit.length);
+            resetDate();
+        }
+        else {
+            handleClickCard(score)
         }
 
         shuffleCard();

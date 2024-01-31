@@ -1,12 +1,8 @@
-import { useState } from 'react';
 import './ScoreDisplay.css'
+import { IScore } from '../../types/IScore';
 
 
-
-const ScoreDisplay: React.FC = () => {
-    const [score, setScore] = useState(0);
-    const [bestScore, setBestScore] = useState(0);
- 
+const ScoreDisplay: React.FC<IScore> = ({score, bestScore}) => {
 
     return (
         <div className="scoreDisplay">
