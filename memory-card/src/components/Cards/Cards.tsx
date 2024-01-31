@@ -18,7 +18,6 @@ const Cards: React.FC<ICards> = ({cards, onClick, updateBestScore}) => {
     const [bestScore, setBestScore] = useState(0);
 
     
-
     function handleClick (id: number): void {
         setCardsUnit(prevCardsUnit => prevCardsUnit
             .map(item => item.id === id ? {...item, click: item.click + 1} : item))
