@@ -1,10 +1,9 @@
 import "./App.css";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 import Cards from "../Cards/Cards";
 import cardsDate from "../../api/cardsDate";
 import ScoreDisplay from "../Score/ScoreDisplay";
 import { useEffect, useState } from "react";
+import LogoSVG from "../../assets/logoSvg.svg";
 
 const App: React.FC = () => {
   const [isClick, setIsClick] = useState(0);
@@ -23,16 +22,23 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="root">
-      <Header />
+    <>
+      <header>
+        <h1>Memory Card</h1>
+      </header>
       <ScoreDisplay score={isClick} bestScore={bestScore} />
       <Cards
         cards={cardsDate}
         onClick={handleChangeScore}
         updateBestScore={handleChangeBestScore}
       />
-      <Footer />
-    </div>
+      <footer>
+        <a href="https://github.com/dg44k">
+          <span>Best regards dg44k</span>
+          <LogoSVG />
+        </a>
+      </footer>
+    </>
   );
 };
 

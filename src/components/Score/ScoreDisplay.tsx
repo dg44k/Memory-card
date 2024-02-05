@@ -1,6 +1,9 @@
 import './ScoreDisplay.css'
-import { IScore } from '../../types/IScore';
 
+type IScore = {
+    score: number;
+    bestScore: number;
+}
 
 const ScoreDisplay: React.FC<IScore> = ({score, bestScore}) => {
 
